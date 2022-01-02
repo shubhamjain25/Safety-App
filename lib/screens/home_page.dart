@@ -1,26 +1,62 @@
-// import 'package:geolocator/geolocator.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:safety_app/services/geolocator_service.dart';
 import 'package:safety_app/widgets/bottom_bar.dart';
 import 'package:safety_app/widgets/circular_curve.dart';
 import 'package:safety_app/widgets/category_card.dart';
-import 'package:safety_app/services/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:safety_app/constants.dart';
-import 'package:safety_app/datamodels/user_location.dart';
-import 'dart:async';
+import 'package:share/share.dart';
+
 
 class HomePage extends StatelessWidget {
 
   var locationMessage = "";
 
-  // void getLocation() async{
-  //   var position = await Geolocator.getCurrentPosition(
-  //     desiredAccuracy: LocationAccuracy.high,
-  //   );
-  //   var lastPosition = await Geolocator.getLastKnownPosition();
-  //   print(lastPosition);
-  //   locationMessage="My last location is ${position.latitude}, ${position.longitude}";
-  //   print(locationMessage);
+  // Future<Position> _determinePosition() async {
+  //   bool serviceEnabled;
+  //   LocationPermission permission;
+  //
+  //   // Test if location services are enabled.
+  //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  //   if (!serviceEnabled) {
+  //     await Geolocator.openLocationSettings();
+  //     return Future.error('Location services are disabled.');
+  //   }
+  //
+  //   permission = await Geolocator.checkPermission();
+  //   if (permission == LocationPermission.denied) {
+  //     permission = await Geolocator.requestPermission();
+  //     if (permission == LocationPermission.denied) {
+  //       // Permissions are denied
+  //       return Future.error('Location permissions are denied');
+  //     }
+  //   }
+  //
+  //   if (permission == LocationPermission.deniedForever) {
+  //     // Permissions are denied forever, handle appropriately.
+  //     return Future.error(
+  //         'Location permissions are permanently denied, we cannot request permissions.');
+  //   }
+  //
+  //   return await Geolocator.getCurrentPosition();
   // }
+
+  // void sharePosition(String locationInformation){
+  //   final String text="Please Help Me! "+locationInformation;
+  //   final String subject = "SOS";
+  //   Share.share(text, subject:subject);
+  // }
+
+  void getLocation() async{
+    Position position = await GeoLocatorService().determinePosition();
+    final String locationMessage="My Longitude: ${position.latitude}, Latitude: ${position.longitude}";
+    final String text="Please Help Me! "+locationMessage;
+    final String subject = "SOS";
+    Share.share(text, subject:subject);
+    print(locationMessage);
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +124,7 @@ class HomePage extends StatelessWidget {
                           title: "Live Location",
                           svgSrc: "assets/icons/location.svg",
                           press: (){
+                            getLocation();
                           },
                         ),
                         CategoryCard(
