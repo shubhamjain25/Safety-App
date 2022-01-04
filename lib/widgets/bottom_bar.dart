@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:safety_app/constants.dart';
+import 'package:safety_app/screens/profile_page.dart';
 
 class BottomNavBar extends StatefulWidget {
 
   final int indexNumber;
+  final Function(int) btnPressed;
 
-  BottomNavBar({this.indexNumber});
+  BottomNavBar({this.indexNumber, this.btnPressed});
 
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedTab=1;
+
+  int _selectedTab;
 
   @override
   Widget build(BuildContext context) {
+    _selectedTab=widget.indexNumber??1;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -35,41 +39,27 @@ class _BottomNavBarState extends State<BottomNavBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          GestureDetector(
-            onTap: (){
-              print("Show User Profile");
-              setState(() {
-                _selectedTab=0;
-              });
+          BottomTabBtn(
+            imagePath: 'assets/images/tab_user.png',
+            isSelected: _selectedTab==0?true:false,
+            onSelection: (){
+              widget.btnPressed(0);
             },
-            child: BottomTabBtn(
-              imagePath: 'assets/images/tab_user.png',
-              isSelected: _selectedTab==0?true:false,
-            ),
           ),
-          GestureDetector(
-            onTap: (){
-              print("Show SOS Stuff");
-              setState(() {
-                _selectedTab=1;
-              });
+          BottomTabBtn(
+            imagePath: 'assets/images/tab_siren.png',
+            isSelected: _selectedTab==1?true:false,
+            onSelection: (){
+              widget.btnPressed(1);
             },
-            child: BottomTabBtn(
-              imagePath: 'assets/images/tab_siren.png',
-              isSelected: _selectedTab==1?true:false,
-            ),
           ),
-          GestureDetector(
-            onTap: (){
-              setState(() {
-                _selectedTab=2;
-              });
-              FirebaseAuth.instance.signOut();
+          BottomTabBtn(
+            imagePath: 'assets/images/tab_logout.png',
+            isSelected: _selectedTab==2?true:false,
+            onSelection: (){
+              widget.btnPressed(2);
             },
-            child: BottomTabBtn(
-              imagePath: 'assets/images/tab_logout.png',
-              isSelected: _selectedTab==2?true:false,
-            ),
+            isLogoutBtn: true,
           ),
         ],
       ),
@@ -81,31 +71,40 @@ class BottomTabBtn extends StatelessWidget {
 
   final String imagePath;
   final bool isSelected;
+  final Function onSelection;
+  final bool isLogoutBtn;
 
-  BottomTabBtn({this.imagePath, this.isSelected});
+  BottomTabBtn({this.imagePath, this.isSelected, this.onSelection, this.isLogoutBtn});
 
   @override
   Widget build(BuildContext context) {
 
     bool _isSelected = isSelected??false;
-    return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: 15.0,
-          vertical: 20.0
-      ),
-      decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(
-              width: 2.0,
-              color: _isSelected ? Theme.of(context).accentColor : Colors.black,
-            ),
-          )
-      ),
-      child: Image(
-        image: AssetImage(imagePath),
-        height: 24.0,
-        width: 24.0,
-        color: _isSelected? Theme.of(context).accentColor : Colors.black,
+    bool _isLogoutBtn= isLogoutBtn??false;
+
+    return GestureDetector(
+      onTap: _isLogoutBtn?(){
+        FirebaseAuth.instance.signOut();
+      }:onSelection,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+            horizontal: 15.0,
+            vertical: 20.0
+        ),
+        decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                width: 2.0,
+                color: _isSelected ? Theme.of(context).accentColor : Colors.black,
+              ),
+            )
+        ),
+        child: Image(
+          image: AssetImage(imagePath),
+          height: 24.0,
+          width: 24.0,
+          color: _isSelected? Theme.of(context).accentColor : Colors.black,
+        ),
       ),
     );
   }

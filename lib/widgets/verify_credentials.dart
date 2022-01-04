@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:safety_app/services/database.dart';
 
 class VerifyCredentials{
 
@@ -13,6 +14,9 @@ class VerifyCredentials{
     try {
       UserCredential _user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: registeredEmail, password: registeredPassword);
+
+      //create a new document for the user with uid
+      await DatabaseService(uid: _user.user.uid).updateUserData('O+', 'Shubham', 20);
       return null;
     }
     on FirebaseAuthException catch (e) {
