@@ -7,8 +7,13 @@ class VerifyCredentials{
   final String registeredEmail;
   final String registeredPassword;
   final BuildContext passContext;
+  final String name;
+  final String age;
+  final String bGroup;
+  final String number;
 
-  VerifyCredentials({@required this.registeredEmail, @required this.registeredPassword, this.passContext});
+
+  VerifyCredentials({@required this.registeredEmail, @required this.registeredPassword, this.passContext, this.name, this.bGroup, this.age, this.number});
 
   Future<String> createNewUser() async {
     try {
@@ -16,7 +21,7 @@ class VerifyCredentials{
           email: registeredEmail, password: registeredPassword);
 
       //create a new document for the user with uid
-      await DatabaseService(uid: _user.user.uid).updateUserData('O+', 'Shubham', 20);
+      await DatabaseService(uid: _user.user.uid).updateUserData(name, bGroup, age, number);
       return null;
     }
     on FirebaseAuthException catch (e) {

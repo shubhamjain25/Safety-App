@@ -1,3 +1,4 @@
+import 'package:safety_app/screens/secondary_landing_page.dart';
 import 'package:safety_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                 CustomBtn(
                   btnText: 'Create New Account',
                   btnPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder:(context)=>RegistrationScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder:(context)=>SecondaryLandingPage()));
                   },
                   isColor: true,
                 ),

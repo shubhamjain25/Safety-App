@@ -1,4 +1,5 @@
 import 'package:safety_app/constants.dart';
+import 'package:safety_app/screens/edit_profile_page.dart';
 import 'package:safety_app/screens/home_page.dart';
 import 'package:safety_app/widgets/custom_button.dart';
 import 'package:safety_app/widgets/verify_credentials.dart';
@@ -17,7 +18,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   FocusNode _passwordNode;
 
   void formSubmission() async{
-
     setState(() {
       showLoadingCircle = true;
     });
@@ -86,7 +86,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   CustomBtn(
                     btnText: 'Register Account',
                     btnPressed: () {
-                      formSubmission();
+                      // formSubmission();
+                      Navigator.push(context, MaterialPageRoute(builder:(context)=>EditProfile(emailValue: emailValue, passwordValue: passwordValue,)));
                       print('Register button tapped');
                     },
                     isVisible: showLoadingCircle,

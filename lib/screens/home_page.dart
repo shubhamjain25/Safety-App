@@ -1,4 +1,6 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:safety_app/screens/edit_profile_page.dart';
+import 'package:safety_app/screens/features_page.dart';
 import 'package:safety_app/screens/profile_page.dart';
 import 'package:safety_app/services/calling_service.dart';
 import 'package:safety_app/services/geolocator_service.dart';
@@ -44,7 +46,6 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey[200],
       // bottomNavigationBar: bottomBar,
       body: Stack(
-
         children: <Widget>[
           Container(
             child: ClipPath(
@@ -57,12 +58,12 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Align(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Align(
                     alignment: Alignment.topRight,
                     child: Container(
                       alignment: Alignment.center,
@@ -70,18 +71,25 @@ class _HomePageState extends State<HomePage> {
                       width: 52,
                     ),
                   ),
-                  Text(
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
                     "Women Safety App",
                     style: Theme.of(context)
                         .textTheme
                         .headline4
                         .copyWith(fontWeight: FontWeight.w900),
                   ),
-                  // SearchBar(),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Expanded(
+                ),
+                // SearchBar(),
+                SizedBox(
+                  height: 30,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+
                     child: PageView(
                       physics: BouncingScrollPhysics(),
                       controller: _pageIndex,
@@ -92,18 +100,18 @@ class _HomePageState extends State<HomePage> {
                       },
                       children: <Widget>[
                         ProfilePage(),
-                        SOSPage(),
+                        FeaturesPage(),
                       ],
                     ),
                   ),
-                  BottomNavBar(
-                    btnPressed:(num){
-                      _pageIndex.animateToPage(num, duration: Duration(milliseconds:600), curve:Curves.easeOutCubic );
-                    } ,
-                    indexNumber: _pageNumber,
-                  ),
-                ],
-              ),
+                ),
+                BottomNavBar(
+                  btnPressed:(num){
+                    _pageIndex.animateToPage(num, duration: Duration(milliseconds:600), curve:Curves.easeOutCubic );
+                  } ,
+                  indexNumber: _pageNumber,
+                ),
+              ],
             ),
           )
         ],
@@ -114,68 +122,4 @@ class _HomePageState extends State<HomePage> {
 
 }
 
-class SOSPage extends StatelessWidget {
 
-  var locationMessage = "";
-  void getLocation() async{
-    Position position = await GeoLocatorService().determinePosition();
-    final String locationMessage="My Longitude: ${position.latitude}, Latitude: ${position.longitude}";
-    final String text="Please Help Me! "+locationMessage;
-    final String subject = "SOS";
-    Share.share(text, subject:subject);
-    print(locationMessage);
-  }
-
-  void makeEmergencyCall() async{
-    var call = CallingService();
-    await call.callNumber(100);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.count(
-      padding: EdgeInsets.only(bottom: 30.0),
-      physics: BouncingScrollPhysics(),
-      crossAxisCount: 2,
-      childAspectRatio: .95,
-      crossAxisSpacing: 20,
-      mainAxisSpacing: 20,
-      children: <Widget>[
-        CategoryCard(
-          title: "Live Location",
-          svgSrc: "assets/icons/location.svg",
-          press: (){
-            getLocation();
-          },
-        ),
-        CategoryCard(
-          title: "Add Guardian",
-          svgSrc: "assets/icons/guardian.svg",
-          press: () {},
-        ),
-        CategoryCard(
-          title: "Emergency",
-          svgSrc: "assets/icons/emergency.svg",
-          press: () {
-            makeEmergencyCall();
-          },
-        ),
-        CategoryCard(
-          title: "Medical",
-          svgSrc: "assets/icons/medical.svg",
-          press: () {},
-        ),
-        CategoryCard(
-          title: "Live Location",
-          svgSrc: "assets/icons/location.svg",
-          press: () {},
-        ),
-        CategoryCard(
-          title: "Add Guardian",
-          svgSrc: "assets/icons/guardian.svg",
-          press: () {},
-        ),
-      ],
-    );
-  }
-}

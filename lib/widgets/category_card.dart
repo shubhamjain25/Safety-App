@@ -45,6 +45,12 @@ class CategoryCard extends StatelessWidget {
                     Container(
                         margin: const EdgeInsets.all(20.0),
                         child:SvgPicture.asset(svgSrc),
+                        // child: Image(
+                        //   image: AssetImage(svgSrc),
+                        //   height: 100,
+                        //   width: 100,
+                        //   color: Theme.of(context).accentColor,
+                        // ),
                     ),
                     Spacer(),
                     Text(

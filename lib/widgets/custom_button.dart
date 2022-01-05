@@ -24,9 +24,9 @@ class CustomBtn extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             width: 1.5,
-            color: _isColor ? Colors.black : Colors.white,
+            color: _isColor ? kPrimaryColor : Colors.white,
           ),
-          color: _isColor ? Colors.white : Colors.black,
+          color: _isColor ? Colors.white : kPrimaryColor,
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Stack(
@@ -38,7 +38,7 @@ class CustomBtn extends StatelessWidget {
                   btnText,
                   style: TextStyle(
                       fontSize: 22.0,
-                      color: _isColor ? Colors.black : Colors.white,
+                      color: _isColor ? kPrimaryColor : Colors.white,
                       fontWeight: FontWeight.w500),
                 ),
               ),
