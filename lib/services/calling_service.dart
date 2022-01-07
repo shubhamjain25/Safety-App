@@ -3,8 +3,8 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class CallingService{
 
-  callNumber(int phNo) async{
-    bool res = await FlutterPhoneDirectCaller.callNumber(phNo.toString());
+  callNumber(String phNo) async{
+    bool res = await FlutterPhoneDirectCaller.callNumber(phNo);
     print("Res value equals $res");
   }
 

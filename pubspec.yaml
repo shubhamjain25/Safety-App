@@ -30,7 +30,8 @@ dependencies:
   share: ^2.0.4
   flutter_phone_direct_caller: ^2.1.0
   flutter_custom_clippers: ^2.0.0
-
+  youtube_player_flutter: ^8.0.0
+  
   # Firebase Dependencies
   firebase_core: ^1.10.6
   firebase_auth: ^3.3.4
