@@ -47,7 +47,10 @@ class CustomBtn extends StatelessWidget {
               visible: _isVisible ? true : false,
               child: Container(
                 child: Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: kPrimaryColor,
+                    backgroundColor: kBlueLightColor,
+                  ),
                 ),
               ),
             ),

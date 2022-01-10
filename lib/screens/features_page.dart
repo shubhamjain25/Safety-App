@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 import 'package:safety_app/screens/helpline_page.dart';
+import 'package:safety_app/screens/location_page.dart';
+import 'package:safety_app/screens/location_change_page.dart';
 import 'package:safety_app/screens/video_screen.dart';
+import 'package:safety_app/services/application_bloc.dart';
 import 'package:safety_app/services/calling_service.dart';
 import 'package:safety_app/services/geolocator_service.dart';
 import 'package:safety_app/widgets/category_card.dart';
@@ -44,7 +48,9 @@ class FeaturesPage extends StatelessWidget {
         CategoryCard(
           title: "Police Station",
           svgSrc: "assets/images/distance.png",
-          press: () {},
+          press: () {
+            Navigator.push(context, MaterialPageRoute(builder:(context)=>LocationChangeListener()));
+          },
         ),
         CategoryCard(
           title: "Live Location",
@@ -68,13 +74,15 @@ class FeaturesPage extends StatelessWidget {
           },
         ),
         CategoryCard(
-          title: "Edit Profile",
-          svgSrc: "assets/images/resume.png",
+          title: "Call Ambulance",
+          svgSrc: "assets/images/ambulance.png",
           press: () {
-
+            makeEmergencyCall("102");
           },
         ),
       ],
     );
   }
 }
+
+//Furthermore features like fake-call, a timer before SOS gets sends out can be implemented.

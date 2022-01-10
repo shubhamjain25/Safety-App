@@ -44,7 +44,10 @@ class LandingPage extends StatelessWidget {
                   }
                   return Scaffold(
                     body: Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                        color: kPrimaryColor,
+                        backgroundColor: kBlueLightColor,
+                      ),
                     ),
                   );
                 });

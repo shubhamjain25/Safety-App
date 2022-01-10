@@ -77,6 +77,7 @@ class ProfilePage extends StatelessWidget {
             width: 200,
             child: Center(
               child: CircularProgressIndicator(
+                color: kPrimaryColor,
                 backgroundColor: kBlueLightColor,
               ),
             ),
