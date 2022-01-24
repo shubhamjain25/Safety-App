@@ -18,7 +18,7 @@ class YoutubePlayerDemoApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           color: kBlueLightColor,
           titleTextStyle: TextStyle(
-            backgroundColor: Colors.yellow,
+            // backgroundColor: Colors.yellow,
             color: Colors.black,
             fontWeight: FontWeight.w500,
             fontSize: 20.0,
@@ -152,13 +152,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       builder: (context, player) => Scaffold(
         appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 12.0),
-            child: Image.asset(
-              'assets/ypf.png',
-              fit: BoxFit.fitWidth,
-            ),
-          ),
           title: const Text(
             'Self Defense Videos',
             style: TextStyle(color: Color(0xFF5a5470)),

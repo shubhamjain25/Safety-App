@@ -121,6 +121,7 @@ class _EditProfileState extends State<EditProfile> {
                     },
                     isVisible: showLoadingCircle,
                     isColor: false,
+                    marginValue: EdgeInsets.symmetric(horizontal: 20.0, vertical: 25.0),
                   )
                 ],
               )

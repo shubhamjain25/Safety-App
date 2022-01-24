@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       children: <Widget>[
-                        ProfilePage(),
+                        ProfilePage(editable: false,),
                         FeaturesPage(),
                       ],
                     ),

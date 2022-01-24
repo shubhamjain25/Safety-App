@@ -92,6 +92,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     },
                     isVisible: showLoadingCircle,
                     isColor: false,
+                    marginValue: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                   )
                 ]),
                 CustomBtn(
@@ -101,6 +102,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     print('Back to Login button tapped');
                   },
                   isColor: true,
+                  marginValue: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                 ),
               ]),
         ),
