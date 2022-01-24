@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
+import 'package:safety_app/screens/edit_profile_page.dart';
+import 'package:safety_app/screens/fake_call.dart';
 import 'package:safety_app/screens/helpline_page.dart';
 import 'package:safety_app/screens/location_page.dart';
 import 'package:safety_app/screens/location_change_page.dart';
+import 'package:safety_app/screens/modify_profile_page.dart';
 import 'package:safety_app/screens/video_screen.dart';
 import 'package:safety_app/services/application_bloc.dart';
 import 'package:safety_app/services/calling_service.dart';
@@ -46,14 +49,14 @@ class FeaturesPage extends StatelessWidget {
           },
         ),
         CategoryCard(
-          title: "Police Station",
+          title: "Show Location",
           svgSrc: "assets/images/distance.png",
           press: () {
             Navigator.push(context, MaterialPageRoute(builder:(context)=>LocationChangeListener()));
           },
         ),
         CategoryCard(
-          title: "Live Location",
+          title: "Share Location",
           svgSrc: "assets/images/location.png",
           press: (){
             getLocation();
@@ -78,6 +81,20 @@ class FeaturesPage extends StatelessWidget {
           svgSrc: "assets/images/ambulance.png",
           press: () {
             makeEmergencyCall("102");
+          },
+        ),
+        CategoryCard(
+          title: "Edit Profile",
+          svgSrc: "assets/images/edit.png",
+          press: () {
+            Navigator.push(context, MaterialPageRoute(builder:(context)=>ModifyProfile()));
+          },
+        ),
+        CategoryCard(
+          title: "Fake Call",
+          svgSrc: "assets/images/telephone-call.png",
+          press: () {
+            Navigator.push(context, MaterialPageRoute(builder:(context)=>FakeCall()));
           },
         ),
       ],

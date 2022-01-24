@@ -6,8 +6,10 @@ class CustomBtn extends StatelessWidget {
   final Function btnPressed;
   final String btnText;
   final bool isVisible;
+  final EdgeInsetsGeometry paddingValue;
+  final EdgeInsetsGeometry marginValue;
 
-  CustomBtn({this.isColor, this.btnPressed, this.btnText, this.isVisible});
+  CustomBtn({this.isColor, this.btnPressed, this.btnText, this.isVisible,this.paddingValue,this.marginValue});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,8 @@ class CustomBtn extends StatelessWidget {
       onTap: btnPressed,
       child: Container(
         width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+        padding: paddingValue,
+        margin: marginValue,
         height: 60.0,
         decoration: BoxDecoration(
           border: Border.all(

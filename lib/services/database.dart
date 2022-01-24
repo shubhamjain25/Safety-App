@@ -8,6 +8,11 @@ import 'package:safety_app/models/user.dart';
 
 class DatabaseService {
   final String uid;
+  // String name;
+  // String bGroup;
+  // String age;
+  // String number;
+
 
   DatabaseService({this.uid});
 
@@ -42,6 +47,16 @@ class DatabaseService {
       number: snapshot.get('number') ?? '100',
     );
   }
+
+  // UserData profileData() {
+  //   return UserData(
+  //     uid: uid,
+  //     name: name ?? '',
+  //     bGroup: bGroup ?? '',
+  //     age: age ?? '20',
+  //     number: number ?? '100',
+  //   );
+  // }
 
   // get infos stream
   Stream<List<Info>> get infos {

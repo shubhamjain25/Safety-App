@@ -92,10 +92,12 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     isVisible: showLoadingCircle,
                     isColor: false,
+                    marginValue: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                   )
                 ]),
                 CustomBtn(
                   btnText: 'Create New Account',
+                  marginValue: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                   btnPressed: () {
                     Navigator.push(context, MaterialPageRoute(builder:(context)=>SecondaryLandingPage()));
                   },
